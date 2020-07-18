@@ -1,5 +1,5 @@
 import api from './api';
-
+//action types are what decide which action is to be performed
 export const ACTION_TYPES={
     FETCH_ALL_USER:"FETCH_ALL_USER",
     FETCH_USER_BY_ID:"FETCH_USER_BY_ID",
@@ -8,6 +8,7 @@ export const ACTION_TYPES={
     DELETE_USER: 'DELETE_USER' 
 }
 
+//different actions to be performed
 export const fetchAll = () => dispatch =>{
     api.userDetail().fetchAll()
     .then(response =>{

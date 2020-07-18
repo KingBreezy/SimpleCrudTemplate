@@ -10,24 +10,24 @@ const initialState = {
     "lastName": "",
     "email": ""
 }
-
+//component
 const UserDetailsFetchPage = (props) => {
     const [values, setValues] = useState(initialState)
     const { addToast } = useToasts()
     const [open, setOpen] = useState(false)
-    
+    //opens the update modal
     const handleUpdate = (record) => {
         setValues(record)
         toggle()
     }
-    
+    //handles the update action 
     const handleEdit = (id, record) => {
         const onSuccess = () => {
             addToast("Updated Successfully", { appearance: 'success' })
         }
         props.updateUser(id, record, onSuccess)
     }
-
+    //sets open on the modal to true or false
     const toggle = () => {
         setOpen(!open)
     }
@@ -40,14 +40,14 @@ const UserDetailsFetchPage = (props) => {
         })
     }
     
-    
+    //handles delete action
     const handleDelete = (id) => {
         const onSuccess = () => {
             addToast("Deleted Successfully", { appearance: 'warning' })
         }
         props.deleteUser(id, onSuccess)
     }
-    
+    //use this to load the data on load (when array is blank it works like component did mount)
     useEffect(() => {
         props.fetchUsers()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,16 +103,16 @@ const UserDetailsFetchPage = (props) => {
         </div>
     )
 }
-
+//matches state in reducer to prop with name of your choice 
 const mapStateToProps = (state) => ({
     UserDetail: state.userdetail.userDetail
 })
-
+//matches action in prop
 const mapDispatchToProps = {
     fetchUsers: actions.fetchAll,
     fetchUsersById: actions.fetchAllById,
     deleteUser: actions.deleteUserDetails,
     updateUser: actions.updateUserDetails
 }
-
+//connects the state and dispatch to props (parent class needs to be wrapped in provider)
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetailsFetchPage)
